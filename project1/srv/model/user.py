@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from project1.srv.rest import login_serializer, db
+from ..rest import login_serializer, db
 from flask.ext.login import UserMixin
 
 class User(UserMixin, db.Model):

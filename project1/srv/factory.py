@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 from flask import Flask
-import logging
 from ..defs import APP_DEFAULT_PACKAGE_NAME, APP_CONFIG_NAME, APP_DEFAULT_CONFIG_NAME
-
+import logging
 
 def create_app(package_name=None, settings_override=None):
     package_name = package_name or APP_DEFAULT_PACKAGE_NAME

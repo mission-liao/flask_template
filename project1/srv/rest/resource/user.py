@@ -2,8 +2,8 @@ from __future__ import absolute_import
 from flask import Blueprint, request, jsonify
 from flask.views import MethodView
 from flask.ext.login import login_user, login_required, current_user, logout_user
-from project1.srv.rest import login_mgr, app, login_serializer
-from project1.srv import model
+from .rest import login_mgr, app, login_serializer
+from ..srv import model
 from datetime import datetime
 
 api_user = Blueprint('user', __name__)
