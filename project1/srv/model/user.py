@@ -1,25 +1,17 @@
 from __future__ import absolute_import
-from project1.srv.rest import login_serializer
+from project1.srv.rest import login_serializer, db
 from flask.ext.login import UserMixin
-from cqlengine import Model, columns, uuid4
 
-class User(UserMixin, Model):
+class User(UserMixin, db.Model):
     """
     class User
 
     only kept static information here. For dynamic info, ex. last-login,
     we would kept them in other table
     """
-    id = columns.UUID(primary_key=True, default=uuid4)
-
-    email = columns.Text(max_length=255, required=True)
-    password = columns.Bytes(required=True)
-    gender = columns.Integer()
-    bDay = columns.Date()
-    nation = columns.Integer()
-
-    # TODO: other static use another model?
-    joinTime = columns.DateTime()
+    id = db.Column(db.Integer, db.Sequence('user_id_seq', start=1, increment=1), primary_key=True)
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.LargeBinary, nullable=False)
 
     def get_auth_token(self):
         return login_serializer.dumps(self.email, self.password)

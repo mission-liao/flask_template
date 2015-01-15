@@ -18,18 +18,3 @@ def register_all_blueprints(app, blueprint_module):
                 if isinstance(item, Blueprint):
                     app.register_blueprint(item)
 
-
-class _Singleton(type):
-    _instance = {}
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instance:
-            cls._instance[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
-        return cls._instance[cls]
-
-
-class Singleton(_Singleton('SingletonMeta', (object,), {})):
-    """
-    a singleton implementation, refer to
-        http://stackoverflow.com/questions/6760685/creating-a-singleton-in-python
-    """
-    pass

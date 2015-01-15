@@ -1,6 +1,7 @@
 Flask>=0.10.1
-Flask-Login==0.2.7
-Flask-Principal==0.4.0
-SQLAlchemy==0.8.2
-itsdangerous==0.23
-uWSGI==1.9.18.2
+Flask-Login>=0.2.7
+Flask-Principal>=0.4.0
+Flask-SQLAlchemy>=2.0
+SQLAlchemy>=0.8.2
+itsdangerous>=0.23
+uWSGI>=1.9.18.2
