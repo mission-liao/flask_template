@@ -1,2 +1,2 @@
-opair-srv-rest
+project1-srv-rest
 ==============

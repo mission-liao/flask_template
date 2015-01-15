@@ -11,7 +11,7 @@ login_mgr = LoginManager()
 login_serializer = URLSafeTimedSerializer(app.secret_key)
 
 # real initialization
-app = create_rest_app(app=app, blueprint_module='opair.srv.rest.api')
+app = create_rest_app(app=app, blueprint_module='project1.srv.rest.api')
 
 # put everything that need to be initialized with flask-object here.
 # -- flask-login

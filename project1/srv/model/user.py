@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from opair.srv.rest import login_serializer
+from project1.srv.rest import login_serializer
 from flask.ext.login import UserMixin
 from cqlengine import Model, columns, uuid4
 

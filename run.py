@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from opair.srv.rest import app
+from project1.srv.rest import app
 
 if __name__ == "__main__":
 
