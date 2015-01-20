@@ -1,10 +1,10 @@
 from __future__ import absolute_import
 from flask import Blueprint, request, jsonify
 from flask.views import MethodView
-from flask.ext.login import login_user, logout_user
+from flask.ext.login import login_user, logout_user, login_required, current_user
 from sqlalchemy.exc import IntegrityError
 from ..api import sql, app
-from ..util import hash_password
+from ..utils import hash_password
 from ...srv import model
 
 
@@ -28,7 +28,7 @@ class UserView(MethodView):
         # create User object
         # TODO: input validation
         u = model.Users(
-            email=request.form['username'],
+            email=request.form['email'],
             password=hash_password(request.form['password'], app.secret_key)
         )
 
@@ -49,10 +49,12 @@ class UserView(MethodView):
 
         return jsonify(id=u.id, error=err), status_code
 
+    @login_required
     def delete(self):
         """ delete user """
+        # TODO: should we allow user to be deleted?
         # make sure that user exists
-        q = sql.session.query(model.Users).filter(model.Users.id == request.args.get('id'))
+        q = sql.session.query(model.Users).filter(model.Users.email == current_user.email)
         if q.count() == 0:
             return '', 404
 
