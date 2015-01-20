@@ -16,4 +16,5 @@ PRESERVE_CONTEXT_ON_EXCEPTION = True
 CELERY_BROKER_URL = 'amqp://'
 
 # sqlalchemy
+# make sure no surprise, use absolute path instead of relative one.
 SQLALCHEMY_DATABASE_URI = 'sqlite:////' + os.path.join(get_root_path(), 'test.db')

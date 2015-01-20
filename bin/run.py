@@ -1,4 +1,18 @@
+"""
+this script allow launch server quickly
+
+```
+    python run.py
+```
+"""
+
+
 from __future__ import absolute_import
+import os
+import sys
+# add parent folder as module search path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from project1.srv.api import app, sql
 
 if __name__ == "__main__":
