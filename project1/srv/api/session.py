@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask.views import MethodView
 from flask.ext.login import login_user, login_required, current_user, logout_user
 from ..api import login_mgr, app, login_serializer, sql
-from ..util import hash_password
+from ..utils import hash_password
 from ...srv import model
 
 
@@ -18,7 +18,7 @@ def load_token(token):
     max_age = app.config['REMEMBER_COOKIE_DURATION'].total_seconds()
 
     data = login_serializer.loads(token, max_age=max_age)
-    u = model.User.query.filter_by(email=data[0]).first()
+    u = model.Users.query.filter_by(email=data[0]).first()
 
     if u and data[1] == u.password:
         return u
@@ -27,12 +27,12 @@ def load_token(token):
 
 @login_mgr.user_loader
 def load_user(uid):
-    return model.User.query.get(uid)
+    return model.Users.query.get(uid)
 
 
 @login_mgr.unauthorized_handler
 def unauthorized():
-    return '', 401
+    return jsonify(error='not login'), 401
 
 
 class SessionView(MethodView):
@@ -44,17 +44,19 @@ class SessionView(MethodView):
         passed via post-data.
         """
         # try to create a new record in database
-        data = request.get_json()
+        q = sql.session.query(model.Users).filter(model.Users.email == request.form['email'])
+        if q.count() == 0:
+            return jsonify(error='User not exists'), 404
 
-        u = model.User.query.filter_by(email=data['email']).first()
+        u = q.first()
         if u:
-            if u.password == hash_password(data['password'], app.secret_key):
+            if u.password == hash_password(request.form['password'], app.secret_key):
                 login_user(u)
                 return jsonify(id=u.id, email=u.email, error=""), 200
             else:
                 return jsonify(error="Password Wrong"), 401
 
-        return jsonify(error="User not exists"), 404
+        return jsonify(error='User not exists'), 404
 
     @login_required 
     def get(self):
