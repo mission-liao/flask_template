@@ -1,5 +1,6 @@
 from werkzeug.utils import find_modules, import_string
 from flask import Blueprint
+from os import path
 import hashlib
 
 
@@ -16,4 +17,7 @@ def register_all_blueprints(app, blueprint_module):
                 item = getattr(mod, item_name)
                 if isinstance(item, Blueprint):
                     app.register_blueprint(item)
+
+def get_root_path():
+    return path.dirname(path.dirname(path.dirname(path.abspath(__file__))))
 

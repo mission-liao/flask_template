@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from itsdangerous import URLSafeTimedSerializer
-from ..util import register_all_blueprints
+from ..utils import register_all_blueprints
 from ..factory import create_app, create_rest_app
 
 # globals to avoid import error
