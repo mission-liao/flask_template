@@ -18,8 +18,8 @@ app = create_rest_app(app=app)
 # -- flask-login
 login_mgr.init_app(app)
 # -- flask-sqlalchemy
-db = SQLAlchemy(app)
+sql = SQLAlchemy(app)
 
 # register blue-prints
-register_all_blueprints(app, blueprint_module='project1.srv.rest.api')
+register_all_blueprints(app, blueprint_module='project1.srv.api')
 

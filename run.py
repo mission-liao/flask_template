@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from project1.srv.rest import app
+from project1.srv.api import app, sql
 
 if __name__ == "__main__":
 
@@ -21,6 +21,9 @@ if __name__ == "__main__":
             '/': join(join(join(abspath(dirname(__file__)), 'client'), 'web'), 'app')
         }
     )
+
+    # TODO: find a better place to create tables
+    sql.create_all()
 
     app.run(
         port=9001,
