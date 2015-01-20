@@ -5,4 +5,3 @@ Flask-SQLAlchemy>=2.0
 SQLAlchemy>=0.8.2
 itsdangerous>=0.23
 uWSGI>=1.9.18.2
-psycopg2>=2.5.4
