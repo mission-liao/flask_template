@@ -11,7 +11,7 @@ class SessionTestCase(BaseTestCase):
         super(SessionTestCase, kls).setUpClass()
 
         # create a user
-        rv = kls.client.post('/r/users/', data=dict(
+        rv = kls.client.post('/r/user/', data=dict(
             email='ml',
             password='123'
         ))
@@ -33,7 +33,7 @@ class SessionTestCase(BaseTestCase):
             raise Exception('Unablt to login user for testing')
 
         # delete account
-        rv = kls.client.delete('/r/users/', query_string=dict(
+        rv = kls.client.delete('/r/user/', query_string=dict(
             password='123'
         ))
         if rv.status_code != 200:

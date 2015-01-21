@@ -32,7 +32,8 @@ if __name__ == "__main__":
     app.wsgi_app = SharedDataMiddleware(
         app.wsgi_app,
         {
-            '/': join(join(join(abspath(dirname(__file__)), 'client'), 'web'), 'app')
+            # serving swagger doc in develop mode, remember to serve by nginx in production mode.
+            '/docs/api': join(join(abspath(dirname(dirname(__file__))), 'docs'), 'api')
         }
     )
 

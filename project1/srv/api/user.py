@@ -15,11 +15,6 @@ class UserView(MethodView):
     """ User resource
     """
 
-    def get(self):
-        """ get a specific user resource
-        """
-        pass
-
     def post(self):
         """ submit function to create new user.
         """
@@ -73,5 +68,5 @@ class UserView(MethodView):
         return '', 200
 
 
-resource_user.add_url_rule('/r/users/', view_func=UserView.as_view('res-user'), methods=['GET', 'POST', 'DELETE'])
+resource_user.add_url_rule('/r/user/', view_func=UserView.as_view('res-user'), methods=['GET', 'POST', 'DELETE'])
 
